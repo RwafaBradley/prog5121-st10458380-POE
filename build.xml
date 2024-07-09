@@ -1,73 +1,86 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- You may freely edit this file. See commented blocks below for -->
-<!-- some examples of how to customize the build. -->
-<!-- (If you delete it and reopen the project it will be recreated.) -->
-<!-- By default, only the Clean and Build commands use this build script. -->
-<!-- Commands such as Run, Debug, and Test only use this build script if -->
-<!-- the Compile on Save feature is turned off for the project. -->
-<!-- You can turn off the Compile on Save (or Deploy on Save) setting -->
-<!-- in the project's Project Properties dialog box.-->
 <project name="Myassignment2" default="default" basedir=".">
     <description>Builds, tests, and runs the project Myassignment2.</description>
     <import file="nbproject/build-impl.xml"/>
-    <!--
 
-    There exist several targets which are by default empty and which can be 
-    used for execution of your tasks. These targets are usually executed 
-    before and after some main targets. They are: 
+    <target name="-init-macrodef-javac">
+        <macrodef name="javac">
+            <attribute name="destdir"/>
+            <element name="src"/>
+            <element name="classpath" optional="true"/>
+            <element name="bootclasspath" optional="true"/>
+            <element name="sourcepath" optional="true"/>
+            <element name="modulepath" optional="true"/>
+            <element name="modulepathentries" optional="true"/>
+            <element name="processorpath" optional="true"/>
+            <element name="processorpathentries" optional="true"/>
+            <element name="upgrademodulepath" optional="true"/>
+            <element name="upgrademodulepathentries" optional="true"/>
+            <element name="endorseddir" optional="true"/>
+            <element name="processor" optional="true"/>
+            <element name="processorarg" optional="true"/>
+            <element name="jvmarg" optional="true"/>
+            <element name="sourcefiles" optional="true"/>
+            <element name="includeantruntime" optional="true"/>
+            <element name="excludefile" optional="true"/>
+            <element name="excludepackage" optional="true"/>
+            <element name="excludeimport" optional="true"/>
+            <element name="link" optional="true"/>
+            <element name="module" optional="true"/>
+            <element name="compilerarg" optional="true"/>
+            <element name="compiler" optional="true"/>
+            <element name="debuglevel" optional="true"/>
+            <element name="encoding" optional="true"/>
+            <element name="extdirs" optional="true"/>
+            <element name="extension" optional="true"/>
+            <element name="includeantruntime" optional="true"/>
+            <element name="excludefile" optional="true"/>
+            <element name="excludepackage" optional="true"/>
+            <element name="excludeimport" optional="true"/>
+            <element name="link" optional="true"/>
+            <element name="module" optional="true"/>
+            <element name="compilerarg" optional="true"/>
+            <element name="compiler" optional="true"/>
+            <element name="debuglevel" optional="true"/>
+            <element name="encoding" optional="true"/>
+            <element name="extdirs" optional="true"/>
+            <element name="extension" optional="true"/>
+            <attribute name="deprecation" default="false"/>
+            <attribute name="debug" default="true"/>
+            <attribute name="optimize" default="false"/>
+            <attribute name="source" default="17"/>
+            <attribute name="target" default="17"/>
+            <sequential>
+                <javac destdir="@{destdir}" source="@{source}" target="@{target}" deprecation="@{deprecation}" debug="@{debug}" optimize="@{optimize}">
+                    <src refid="@{src}"/>
+                    <classpath refid="@{classpath}"/>
+                    <bootclasspath refid="@{bootclasspath}"/>
+                    <sourcepath refid="@{sourcepath}"/>
+                    <modulepath refid="@{modulepath}"/>
+                    <modulepathentries refid="@{modulepathentries}"/>
+                    <processorpath refid="@{processorpath}"/>
+                    <processorpathentries refid="@{processorpathentries}"/>
+                    <upgrademodulepath refid="@{upgrademodulepath}"/>
+                    <upgrademodulepathentries refid="@{upgrademodulepathentries}"/>
+                    <endorseddir refid="@{endorseddir}"/>
+                    <processor refid="@{processor}"/>
+                    <processorarg refid="@{processorarg}"/>
+                    <jvmarg refid="@{jvmarg}"/>
+                    <sourcefiles refid="@{sourcefiles}"/>
+                    <includeantruntime refid="@{includeantruntime}"/>
+                    <excludefile refid="@{excludefile}"/>
+                    <excludepackage refid="@{excludepackage}"/>
+                    <excludeimport refid="@{excludeimport}"/>
+                    <link refid="@{link}"/>
+                    <module refid="@{module}"/>
+                    <compilerarg refid="@{compilerarg}"/>
+                    <compiler refid="@{compiler}"/>
+                    <debuglevel refid="@{debuglevel}"/>
+                    <encoding refid="@{encoding}"/>
+                    <extdirs refid="@{extdirs}"/>
+                    <extension refid="@{extension}"/>
+                </javac>
+            </sequential>
+        </macrodef>
+    </target>
 
-      -pre-init:                 called before initialization of project properties
-      -post-init:                called after initialization of project properties
-      -pre-compile:              called before javac compilation
-      -post-compile:             called after javac compilation
-      -pre-compile-single:       called before javac compilation of single file
-      -post-compile-single:      called after javac compilation of single file
-      -pre-compile-test:         called before javac compilation of JUnit tests
-      -post-compile-test:        called after javac compilation of JUnit tests
-      -pre-compile-test-single:  called before javac compilation of single JUnit test
-      -post-compile-test-single: called after javac compilation of single JUunit test
-      -pre-jar:                  called before JAR building
-      -post-jar:                 called after JAR building
-      -post-clean:               called after cleaning build products
-
-    (Targets beginning with '-' are not intended to be called on their own.)
-
-    Example of inserting an obfuscator after compilation could look like this:
-
-        <target name="-post-compile">
-            <obfuscate>
-                <fileset dir="${build.classes.dir}"/>
-            </obfuscate>
-        </target>
-
-    For list of available properties check the imported 
-    nbproject/build-impl.xml file. 
-
-
-    Another way to customize the build is by overriding existing main targets.
-    The targets of interest are: 
-
-      -init-macrodef-javac:     defines macro for javac compilation
-      -init-macrodef-junit:     defines macro for junit execution
-      -init-macrodef-debug:     defines macro for class debugging
-      -init-macrodef-java:      defines macro for class execution
-      -do-jar:                  JAR building
-      run:                      execution of project 
-      -javadoc-build:           Javadoc generation
-      test-report:              JUnit report generation
-
-    An example of overriding the target for project execution could look like this:
-
-        <target name="run" depends="Myassignment2-impl.jar">
-            <exec dir="bin" executable="launcher.exe">
-                <arg file="${dist.jar}"/>
-            </exec>
-        </target>
-
-    Notice that the overridden target depends on the jar target and not only on 
-    the compile target as the regular run target does. Again, for a list of available 
-    properties which you can use, check the target you are overriding in the
-    nbproject/build-impl.xml file. 
-
-    -->
 </project>
